@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://pixabay.com/api';
-const END_POINTS = {
-  events: '/events',
-  recipes: '/recipes',
-  areas: '/areas',
-  categories: '/categories',
-  ingredients: '/ingredients',
-  popular: '/recipes/popular',
-};
-
-axios.defaults.baseURL = BASE_URL;
-
-export const getImages = async () => {
-  const response = await axios(`${END_POINTS.events}`);
-  return response.data;
-};
+export async function getImages(searchQuery, pageNumber = 1) {
+    const config = {
+        url: 'https://pixabay.com/api/',
+        params: {
+            key: '38641927-f84485d6b228f5ae40ab4372b',
+            q: searchQuery,
+            image_type: 'photo',
+            orientation: 'horizontal',
+            safesearch: true,
+            page: pageNumber,
+            per_page: 200,
+        },
+    };
+    const response = await axios(config);
+    return response.data;
+}
