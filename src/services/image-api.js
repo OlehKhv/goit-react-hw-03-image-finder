@@ -10,7 +10,7 @@ export async function getImages(searchQuery, pageNumber = 1) {
             orientation: 'horizontal',
             safesearch: true,
             page: pageNumber,
-            per_page: 200,
+            per_page: 12,
         },
     };
     const response = await axios(config);

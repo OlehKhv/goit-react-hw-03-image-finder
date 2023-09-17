@@ -1,9 +1,10 @@
 import Section from './Section/Section';
+import { Wrapper } from './App.styled';
 
 export const App = () => {
     return (
-        <div className="app">
+        <Wrapper>
             <Section />
-        </div>
+        </Wrapper>
     );
 };

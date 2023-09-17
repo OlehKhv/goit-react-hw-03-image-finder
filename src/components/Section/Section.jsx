@@ -1,12 +1,10 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
+import Modal from './Modal/Modal';
 
 export class Section extends Component {
-    static propTypes = {};
-
-    state = { searhQuery: '' };
+    state = { searhQuery: '', isShowModal: false, largeImgUrl: '' };
 
     onSubmit = value => {
         if (value && value !== this.state.searhQuery) {
@@ -14,11 +12,29 @@ export class Section extends Component {
         }
     };
 
+    getImgUrl = imgUrl => {
+        this.setState({ largeImgUrl: imgUrl });
+    };
+
+    toggleModal = () => {
+        this.setState(prev => ({ isShowModal: !prev.isShowModal }));
+    };
+
     render() {
         return (
             <section>
                 <Searchbar onSubmit={this.onSubmit} />
-                <ImageGallery searhQuery={this.state.searhQuery} />
+                <ImageGallery
+                    searhQuery={this.state.searhQuery}
+                    getImgUrl={this.getImgUrl}
+                    toggleModal={this.toggleModal}
+                />
+                {this.state.isShowModal && (
+                    <Modal
+                        imgUrl={this.state.largeImgUrl}
+                        toggleModal={this.toggleModal}
+                    />
+                )}
             </section>
         );
     }

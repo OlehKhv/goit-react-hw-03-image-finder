@@ -1,16 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
+import { GalleryItem, GalleryItemImg } from './ImageGalleryItem.styled';
 
-const ImageGalleryItem = ({ smallImg, alt, largeImg }) => {
+const ImageGalleryItem = ({
+    largeImg,
+    smallImg,
+    alt,
+    getImgUrl,
+    toggleModal,
+}) => {
+    const onClick = () => {
+        getImgUrl(largeImg);
+        toggleModal();
+    };
     return (
-        <li className="gallery-item">
-            <img className="gallery-item-img" src={smallImg} alt={alt} />
-            <Modal imgSrc={largeImg} alt={alt} />
-        </li>
+        <GalleryItem onClick={onClick}>
+            <GalleryItemImg src={smallImg} alt={alt} />
+        </GalleryItem>
     );
 };
 
-ImageGalleryItem.propTypes = {};
+ImageGalleryItem.propTypes = {
+    toggleModal: PropTypes.func.isRequired,
+    getImgUrl: PropTypes.func.isRequired,
+    smallImg: PropTypes.string.isRequired,
+    largeImg: PropTypes.string.isRequired,
+    alt: PropTypes.string.isRequired,
+};
 
 export default ImageGalleryItem;
